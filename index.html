@@ -1,0 +1,111 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>jQuery flowchart.js Example</title>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" integrity="sha384-y3tfxAZXuh4HwSYylfB+J125MxIs6mR5FOHamPBG064zB+AFeWH94NdvaCBm8qnd" crossorigin="anonymous">
+<link href="jquery.flowchart.css" rel="stylesheet" type="text/css">
+<link href="style.css" rel="stylesheet" type="text/css">
+
+
+</head>
+
+<body>
+<div class="container">
+    
+  <h1>
+    Custom jQuery flowchart.js Example
+  </h1>
+  <div class="demo" id="example"></div>
+  <button class="btn btn-primary" id="create_operator">
+    Create A New Operator
+  </button>
+  <button class="btn btn-danger" id="delete_selected_button">
+    Delete Selected Operator
+  </button>
+</div>
+<script src="./jquery.js"></script>
+<script src="./jquery-ui.js"></script>
+<script src="jquery.flowchart.js"></script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    var data = {
+      operators: {
+        operator1: {
+          top: 20,
+          left: 20,
+          properties: {
+            title: 'Yesh operator 1',
+            inputs: {},
+            outputs: {
+              output_1: {
+                label: 'Output 1',
+              }
+            }
+          }
+        },
+        operator2: {
+          top: 80,
+          left: 300,
+          properties: {
+            title: 'Yesh operator 2',
+            inputs: {
+              input_1: {
+                label: 'Input 1',
+              },
+              
+            },
+            outputs: {
+              output_1: {
+                label: 'Output 1',
+              }
+            }
+          }
+        },
+      }
+    };
+
+    // Apply the plugin on a standard, empty div...
+    $('#example').flowchart({
+      data: data
+    });
+  });
+  // creating the operator
+    // setting operator properties
+  var operatorI = 0;
+    $('#create_operator').click(function() {
+      var operatorId = 'created_operator_' + operatorI;
+      var operatorData = {
+        top: 60,
+        left: 500,
+        properties: {
+          title: 'Yesh operator ' + (operatorI + 3),
+          inputs: {
+            input_1: {
+              label: 'Input 1',
+            }
+          },
+          outputs: {
+            output_1: {
+              label: 'Output 1',
+            }
+          }
+        }
+      };
+
+      operatorI++; // incrementing the operator title
+      // attaching the created operator to the example id
+      $('#example').flowchart('createOperator', operatorId, operatorData);
+    });
+
+    $('#delete_selected_button').click(function() {
+      $('#example').flowchart('deleteSelected');
+    });
+</script>
+
+</body>
+</html>
